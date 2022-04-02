@@ -1,7 +1,7 @@
 
 
 
-@extends('admin.home')
+@extends('admin.master')
 @section('title','Admin Products')
 @section('content')
 <button class=""><a href="{{route('addProduct')}}" class="btn btn-warning">Create Products</a></button>
@@ -16,7 +16,7 @@
         <th>Description</th>
         {{-- <th>Slug</th> --}}
         <th>Status</th>
-        <th>Category_ID</th>
+        <th>Category</th>
         <th>Created at</th>
         <th>Updated at</th>
         <th>Action</th>
@@ -33,7 +33,7 @@
                     <td>{{ $product->descripton}}</td>
                     {{-- <td>{{ $product->slug ?: 'N/A' }}</td> --}}
                     <td>{{ $product->status == 1 ? 'Active' : 'Deactive' }}</td>
-                    <td>{{ $product->category_id }}</td>
+                    <td>{{ $product->category->name }}</td>
                     <td>{{ $product->created_at ?: 'N/A' }}</td>
                     <td>{{ $product->updated_at ?: 'N/A' }}</td>
                     {{-- <td><button class="btn btn-primary" type="submit"><a href="{{route('delete',['id'=>$category->id])}}">Xóa</a></button></td> --}}
@@ -50,7 +50,7 @@
                             {{-- <input type="text" name="_method" value="DELETE"> --}}
                             @csrf
                             {{-- <input type="text" name="csrf_token" value="asdadasd"> --}}
-                            <button type="submit" class="btn btn-danger">
+                            <button onclick="return confirm('Chắc ko bạn')" type="submit" class="btn btn-danger">
                                 Delete
                             </button>
                         </form>

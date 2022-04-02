@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryProductController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -78,4 +81,26 @@ Route::prefix('/admin')->group(function () {
     Route::put('/products/update/{id}', [ProductController::class, 'updateProduct'])->name('updateProduct');
 
     Route::any('/products/{id}', [ProductController::class, 'deleteProduct'])->name('deleteProduct');
+
+    // user
+    Route::get('/users', [UserController::class, 'userIndex'])->name('userIndex');
+    
+    Route::get('/users/create', [UserController::class, 'createUser'])->name('addUser');
+    Route::post('/users/store', [UserController::class, 'storeUser'])->name('storeUser');
+
+    Route::get('/users/edit/{id}', [UserController::class, 'editUser'])->name('editUser');
+    Route::put('/users/update/{id}', [UserController::class, 'updateUser'])->name('updateUser');
+
+    Route::any('/users/{id}', [UserController::class, 'deleteUser'])->name('deleteUser');
+
+    // post
+    Route::get('/post', [CategoryProductController::class, 'postIndex'])->name('postIndex');
+
+    Route::get('/post/create', [CategoryProductController::class, 'createPost'])->name('addPost');
+    Route::post('/post/store', [CategoryProductController::class, 'storePost'])->name('storePost');
+
+    Route::get('/post/edit/{id}', [CategoryProductController::class, 'editPost'])->name('editPost');
+    Route::put('/post/update/{id}', [CategoryProductController::class, 'updatePost'])->name('updatePost');
+
+    Route::any('/post/{id}', [CategoryProductController::class, 'deletePost'])->name('deletePost');
 });

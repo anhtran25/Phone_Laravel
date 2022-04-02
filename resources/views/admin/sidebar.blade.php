@@ -1,7 +1,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="#" class="brand-link">
       <img src="{{asset('img')}}/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Dashboard AeShop</span>
     </a>
@@ -56,46 +56,35 @@
                   <p>Product</p>
                 </a>
               </li>
-              
+              <li class="nav-item">
+                <a href="{{route('userIndex')}}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{route('postIndex')}}" class="nav-link active">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Post</p>
+                </a>
+              </li>
             </ul>
           </li>
           
           
           
           <li class="nav-header">EXAMPLES</li>
-          
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-book"></i>
-              <p>
-                Pages
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            
-          </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-plus-square"></i>
               <p>
-                Extras
+                Oder
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-search"></i>
-              <p>
-                Search
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-            
-          </li>
-        
-          
+         
           
         </ul>
       </nav>

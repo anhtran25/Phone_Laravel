@@ -15,11 +15,7 @@ class CategoryFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    // $table->id();
-    // $table->string('name');
-    // $table->string('description')->nulltable();
-    // $table->string('slug')->unique();
-    // $table->tinyInteger('status')->default(0);
+    
     public function definition()
     
     {

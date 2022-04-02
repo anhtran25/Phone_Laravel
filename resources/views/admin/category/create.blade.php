@@ -1,4 +1,4 @@
-@extends('admin.home')
+@extends('admin.master')
 
 @section('content')
 @section(
@@ -65,7 +65,7 @@ class="form"
         @enderror
 
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Sumit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
         <a href="{{route('categoryIndex')}}" class="btn btn-warning">
             Cancel
         </a>

@@ -23,20 +23,23 @@ class CategoryRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        return 
             [
             'name' => 'required|unique:categories|max:255|min:6',
             'description' => 'min:6',
             'status' => 'required',
-        ],
-        [
+            ];
+        
+        
+    }
+    public function messages(){
+       return [
             'name.required' => ' Khong duoc de trong ten',
             'name.max' => 'Ten khong duoc qua 255 ki tu',
             'name.min' => 'Ten phai nhieu hon 6 ki tu',
             'description.min' => 'Mo ta phai nhieu hon 6 ki tu',
             'status.required' => 'Yeu cau chon trang thai',
 
-        ]
-        ];
+       ];
     }
 }

@@ -1,4 +1,4 @@
-@extends('admin.home')
+@extends('admin.master')
 
 @section('content')
 @section(
@@ -102,20 +102,22 @@ class="form"
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <div class="form-group">
-            <label for="category_id">ID Danh mục</label>
-            <input
-            type="number"
-                name="category_id"
-                class="form-control"
-                id="category_id"
-                value="{{isset($product) ? $product->category_id : ''}}"
-            />
+            <label for="category_id">Danh mục</label>
+            <select name="category_id" id="category_id" >
+                @foreach ($category as $cate)
+                    @if ($cate->status==1)
+                    {{-- <option value="{{$cate->id}}">{{$cate->name}}</option> --}}
+                    <option value="{{$cate->id}}" {{(isset($product) && $cate->id == $product->category_id )? "selected" : ""}}>{{$cate->name}}</option>    
+                    @endif
+                @endforeach
+            </select>
+            
             @error('category_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Sumit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
         <a href="{{route('productIndex')}}" class="btn btn-warning">
             Cancel
         </a>

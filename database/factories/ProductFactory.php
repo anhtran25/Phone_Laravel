@@ -23,13 +23,13 @@ class ProductFactory extends Factory
         return [
             //
             'name'=>$name,
-            'price'=>$this->faker->numberBetween(),
-            'quantity'=>$this->faker->numberBetween(),
+            'price'=>$this->faker->numberBetween(1-10),
+            'quantity'=>$this->faker->numberBetween(1-10),
             'image'=>$this->faker->text(),
             'descripton'=>$this->faker->text(),
             'status'=>$this->faker->numberBetween(0,1),
-            'category_id'=>$this->numberBetween(),
-            // 'slug'=>$slug
+            'category_id'=>$this->faker->numberBetween(1-3),
+            
 
         ];
     }

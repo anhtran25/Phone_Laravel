@@ -17,4 +17,12 @@ class Category extends Model
         'status',
         
     ];
+    public function products() {
+        return $this->belongsToMany(
+            Product::class,
+            'category_product', // bang trung gian
+            'category_id', // khoa ngoai tuong ung voi model hien tai
+            'product_id', // khoa ngoai cua bang con lai
+        );
+    }
 }

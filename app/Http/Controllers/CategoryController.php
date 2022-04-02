@@ -10,15 +10,11 @@ class CategoryController extends Controller
     
     public function categoryIndex()
     {
-        // Eloquent
-        // all: lay ra toan bo cac ban ghi
-        // $categories = Category::all();
-        // get: lay ra toan bo cac ban ghi, ket hop dc cac dieu kien #
-        // get se nam cuoi cung cua doan truy van
+        
         $categories = Category::
             where('id', '>', 0)
             ->paginate(5);
-            // {{}}
+            
 
         return view('admin.category.index',compact('categories'));
     }
@@ -69,6 +65,20 @@ class CategoryController extends Controller
        $cateUpdate->description = $request->description;
        $cateUpdate->slug = Str::slug($request->name) . ' - ' . uniqid();
        $cateUpdate->status = $request->status;
+       $cateUpdate = $request->validate([
+        'name' => 'required|unique:categories|max:255|min:6',
+        'description' => 'min:6',
+        'status' => 'required',
+    ],
+    [
+        'name.required' => ' Khong duoc de trong ten',
+        'name.max' => 'Ten khong duoc qua 255 ki tu',
+        'name.min' => 'Ten phai nhieu hon 6 ki tu',
+        'description.min' => 'Mo ta phai nhieu hon 6 ki tu',
+        'status.required' => 'Yeu cau chon trang thai',
+
+    ]
+);
 
        $cateUpdate->update();
        return redirect()->route('categoryIndex');
@@ -76,16 +86,12 @@ class CategoryController extends Controller
     }
     public function delete($id){
         // Casch1: destroy
+        // $product=Product::where('category_id',$id)->get();
         Category::destroy($id);
 
         // $categoryDelete = Category::destroy($id);
-        return redirect()->route('categoryIndex');
+        return redirect()->route('categoryIndex')->with('message','Xóa thành công !');
 
-        // if ($categoryDelete !==0) {
-        // }
-        // Cách :
-
-        // $category = Category::find($id);
-        // $category -> delete();
+        
     }
 }

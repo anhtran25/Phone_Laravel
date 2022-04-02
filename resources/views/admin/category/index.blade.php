@@ -1,7 +1,7 @@
 
 <button class="btn btn-primary" type="submit"><a href="{{route('add')}}">Thêm</a></button>
 
-@extends('admin.home')
+@extends('admin.master')
 @section('title','Admin Categories')
 @section('content')
 <button class=""><a href="{{route('add')}}" class="btn btn-warning">Create Category</a></button>
@@ -41,9 +41,10 @@
                             {{-- <input type="text" name="_method" value="DELETE"> --}}
                             @csrf
                             {{-- <input type="text" name="csrf_token" value="asdadasd"> --}}
-                            <button type="submit" class="btn btn-danger">
+                            <button onclick="return confirm('Chắc ko bạn')" type="submit" class="btn btn-danger">
                                 Delete
                             </button>
+
                         </form>
                     </td>
                 </tr>
