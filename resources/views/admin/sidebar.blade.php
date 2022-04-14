@@ -3,7 +3,7 @@
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
       <img src="{{asset('img')}}/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Dashboard AeShop</span>
+      <span class="brand-text font-weight-light">AE Shop</span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +14,9 @@
           <img src="{{asset('img')}}/20621089_275426592861427_3539016159873848006_n.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Trong Anh Jr</a>
+          <a href="#" class="d-block">{{Auth::user()->name}}</a>
+          <a href="#" class="d-block">PH13025</a>
+          <a href="{{route('auth.logout')}}">Đăng xuất</a>
         </div>
       </div>
 

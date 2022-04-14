@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     public function userIndex()
@@ -47,6 +49,8 @@ class UserController extends Controller
         
         $user = new User();
         $user->fill($userData);
+        $user->password=Hash::make($request->password);
+
         
         
 

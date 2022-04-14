@@ -25,7 +25,7 @@ class="form"
             value="{{isset($category) ? $category->name : ''}}"
         />
         @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group">
@@ -37,7 +37,7 @@ class="form"
             value="{{isset($category) ? $category->description : ''}}"
         />
         @error('description')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group">
@@ -61,7 +61,7 @@ class="form"
         <label for="status">Active</label>
     </div>
     @error('status')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
 
     <div class="form-group">

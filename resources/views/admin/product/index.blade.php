@@ -28,12 +28,19 @@
                     <td>{{ $product->name }}</td>
                     <td>{{ $product->price }}</td>
                     <td>{{ $product->quantity }}</td>
-                    <td><img width="200" src="{{ $product->image }}" alt=""></td>
+                    <td><img width="200" src="{{ asset('storage/images/'.$product->image )}}" alt=""></td>
                     
                     <td>{{ $product->descripton}}</td>
-                    {{-- <td>{{ $product->slug ?: 'N/A' }}</td> --}}
+                   
                     <td>{{ $product->status == 1 ? 'Active' : 'Deactive' }}</td>
-                    <td>{{ $product->category->name }}</td>
+                    <td>
+                        @if(isset($product->category->name))
+                        {{$product->category->name }}
+                        @else
+                        N/A
+                        @endif
+                    </td>
+                    {{-- <td>{{ $product->category->name }}</td> --}}
                     <td>{{ $product->created_at ?: 'N/A' }}</td>
                     <td>{{ $product->updated_at ?: 'N/A' }}</td>
                     {{-- <td><button class="btn btn-primary" type="submit"><a href="{{route('delete',['id'=>$category->id])}}">Xóa</a></button></td> --}}

@@ -11,7 +11,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Email</th>
-        <th>Password</th>
+        {{-- <th>Password</th> --}}
         <th>Status</th>
         <th>Created at</th>
         <th>Updated at</th>
@@ -23,7 +23,7 @@
                     <td>{{ $user->id }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>{{ $user->password }}</td>
+                    {{-- <td>{{ $user->password }}</td> --}}
                     <td>{{ $user->status == 1 ? 'Active' : 'Deactive' }}</td>
                     <td>{{ $user->created_at ?: 'N/A' }}</td>
                     <td>{{ $user->updated_at ?: 'N/A' }}</td>

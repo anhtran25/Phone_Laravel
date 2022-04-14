@@ -14,7 +14,7 @@ class ProductController extends Controller
     {
         
         $products = Product::with('category')
-            ->where('status','>','0')
+            ->where('id','>','0')
             ->paginate(5);
             
 
@@ -56,6 +56,10 @@ class ProductController extends Controller
         $product = new Product();
         $product->fill($productData);
         // $product->slug = Str::slug($request['name']).uniqid();
+        $file = $request->image->getClientOriginalName();
+        $newName=($product->name.$file);
+        $request->image->storeAs('public/images', $product->name.$file);
+        $product->image=$newName;
        
 
 
@@ -73,7 +77,7 @@ class ProductController extends Controller
     {
         // dd($request);
         $productUpdate = $request->validate([
-            'name' => 'required|unique:categories|max:255|min:6',
+            'name' => 'required|max:255|min:6',
             'price'=> 'required|integer',
             'quantity'=>'required|integer',
             'image'=>'min:5',
@@ -99,11 +103,17 @@ class ProductController extends Controller
        $productUpdate->name = $request->name;
        $productUpdate->price = $request->price;
        $productUpdate->quantity = $request->quantity;
-       $productUpdate->image = $request->image;
+    //    $productUpdate->image = $request->image;
        $productUpdate->descripton = $request->descripton;
     //    $productUpdate->slug = Str::slug($request->name) . ' - ' . uniqid();
        $productUpdate->status = $request->status;
        $productUpdate->category_id = $request->category_id;
+       $file = $request->image->getClientOriginalName();
+        $newName=($productUpdate->name.$file);
+        $request->image->storeAs('public/images', $productUpdate->name.$file);
+        $productUpdate->image=$newName;
+
+   
        
 
        $productUpdate->save();

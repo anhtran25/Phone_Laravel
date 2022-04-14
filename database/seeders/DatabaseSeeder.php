@@ -20,9 +20,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
        
-        Category::factory(10)->create();
-        Product::factory(10)->create();
+        // Category::factory(10)->create();
+        // Product::factory(10)->create();
         User::factory(10)->create();
-        CategoryProduct::factory(10)->create();
+        // CategoryProduct::factory(10)->create();
     }
 }

@@ -10,7 +10,8 @@
     ? route('updateProduct', $product->id)
     : route('storeProduct') }}" 
 class="form"
- method="POST">
+ method="POST"
+ enctype="multipart/form-data">
  @if (isset($product))
  @method('PUT')
  @endif
@@ -25,7 +26,7 @@ class="form"
             value="{{isset($product) ? $product->name : ''}}"
         />
         @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group">
@@ -38,7 +39,7 @@ class="form"
             value="{{isset($product) ? $product->price : ''}}"
         />
         @error('price')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group">
@@ -51,19 +52,24 @@ class="form"
             value="{{isset($product) ? $product->quantity : ''}}"
         />
         @error('quantity')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group">
         <label for="image">Image</label>
+        @if (isset($product))
+        <img width="200" src="{{ asset('storage/images/'.$product->image )}}" alt="">
+        @endif
+        
         <input
+        type="file"
             name="image"
             class="form-control"
             id="image"
             value="{{isset($product) ? $product->image : ''}}"
         />
         @error('image')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group">
@@ -75,7 +81,7 @@ class="form"
             value="{{isset($product) ? $product->descripton : ''}}"
         />
         @error('descripton')
-            <div class="alert alert-danger">{{ $message }}</div>
+            <div class="alert text-danger">{{ $message }}</div>
         @enderror
     </div>
     <div class="form-group">
@@ -113,11 +119,11 @@ class="form"
             </select>
             
             @error('category_id')
-                <div class="alert alert-danger">{{ $message }}</div>
+                <div class="alert text-danger">{{ $message }}</div>
             @enderror
         </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button  type="submit" class="btn btn-primary">Submit</button>
         <a href="{{route('productIndex')}}" class="btn btn-warning">
             Cancel
         </a>

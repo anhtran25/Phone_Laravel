@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Product;
+
 use Illuminate\Support\Str;
 class CategoryController extends Controller
 {
@@ -85,11 +87,17 @@ class CategoryController extends Controller
 
     }
     public function delete($id){
-        // Casch1: destroy
-        // $product=Product::where('category_id',$id)->get();
+       
+        $product=Product::where('category_id',$id)->get();
+        foreach($product as $p){
+            $p->status=0;
+        $p->save();
+        }
+        
+        
         Category::destroy($id);
 
-        // $categoryDelete = Category::destroy($id);
+        
         return redirect()->route('categoryIndex')->with('message','Xóa thành công !');
 
         

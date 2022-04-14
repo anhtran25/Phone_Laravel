@@ -6,6 +6,9 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryProductController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
+
 
 
 /*
@@ -19,30 +22,10 @@ use App\Http\Controllers\CategoryProductController;
 |
 */
 
-Route::get('/', function () {
-    $users = [
-        [
-        'name' => 'Trong Anh',
-        'height' => '165cm',
-        'weight' =>'55kg',
-        'gender' => 'Nam',
-        'age' => '27',
-        'class' => 'Web16201',
-        'id' => '1',
-        'avatar' => 'https://scontent.fhan14-1.fna.fbcdn.net/v/t1.18169-9/20621089_275426592861427_3539016159873848006_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=Ixto_utcgyIAX8sGHtp&tn=K6KRstWemgGUiiGB&_nc_ht=scontent.fhan14-1.fna&oh=00_AT96k225f2JHdFJS22uW3QNYnJG6Ja4DFB5levOWS0l3Lg&oe=624D7487',
-        ],
-        
-    ];
-    return view('welcome',['users' => $users]);
-});
-Route::get('/login', function () {
-    // dd("login view");
-    $email = 'anhttph13025';
-    // return view('auth.login')->with('username', 'anhttph13025');
-    return view('auth.login', [
-        'email' => $email,
-    ]);
-});
+Route::get('/', [HomeController::class, 'homeIndex'])->name('homeIndex');
+    
+
+
 
 Route::get('/users/{userID?}', function (
     Request $request,
@@ -50,16 +33,17 @@ Route::get('/users/{userID?}', function (
     ) {
     dd($userID, $request->all());
 });
-Route::get('/home', function (){
-    return view('home');
-});
+// Route::get('/home', function (){
+//     return view('home');
+// });
 Route::get('/product', function (){
     return view('product');
 });
-Route::get('/admin', function (){
-    return view('admin.home');
-});
-Route::prefix('/admin')->group(function () {
+
+    Route::middleware(['auth'])->prefix('/admin')->group(function () {
+        Route::get('/', function (){
+            return view('admin.home');
+        });
     Route::get('/categories', [CategoryController::class, 'categoryIndex'])->name('categoryIndex');
     
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('add');
@@ -72,7 +56,7 @@ Route::prefix('/admin')->group(function () {
     
 
     // product
-    Route::get('/products', [ProductController::class, 'productIndex'])->name('productIndex');
+    Route::middleware(['auth'])->get('/products', [ProductController::class, 'productIndex'])->name('productIndex');
     
     Route::get('/products/create', [ProductController::class, 'createProduct'])->name('addProduct');
     Route::post('/products/store', [ProductController::class, 'storeProduct'])->name('storeProduct');
@@ -104,3 +88,13 @@ Route::prefix('/admin')->group(function () {
 
     Route::any('/post/{id}', [CategoryProductController::class, 'deletePost'])->name('deletePost');
 });
+
+Route::get('/auth/logout', [LoginController::class, 'logout'])
+    ->middleware('auth')->name('auth.logout');
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [LoginController::class, 'Loginindex'])->name('login');
+    Route::post('/login', [LoginController::class, 'login'])->name('post-login');
+});
+Route::get('/signup', [LoginController::class, 'sigup'])->name('sigup');
+Route::post('/sigup', [LoginController::class, 'storeUp'])->name('storeUp');
